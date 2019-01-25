@@ -58,6 +58,25 @@ func CreateService(service *model.Service) (err error) {
 	return err
 }
 
+func GetAllServices() (results []model.Service, err error) {
+
+	serviceStates, err := GetAllServiceStates()
+	if err != nil {
+		return nil, err
+	}
+
+	for _, serviceState := range serviceStates {
+		results = append(results, model.Service{
+			ID:          serviceState.ID,
+			Image:       serviceState.Image,
+			Name:        serviceState.Name,
+			Replicas:    int(serviceState.ReplicasRequired),
+			MemoryLimit: serviceState.MemoryLimit})
+	}
+
+	return
+}
+
 // DockerServices gets all running docker services
 func GetAllServiceStates() (results []pcmodel.ServiceState, err error) {
 
