@@ -8,11 +8,12 @@ import (
 	"github.com/docker/docker/api/types/swarm"
 	"github.com/docker/docker/client"
 	"github.com/plancks-cloud/plancks-cloud/model"
-	pc_model "github.com/plancks-cloud/plancks-docker/model"
+	pcmodel "github.com/plancks-cloud/plancks-docker/model"
 	"log"
 	"sort"
 )
 
+// CreateService creates a service
 func CreateService(service *model.Service) (err error) {
 	cli, err := client.NewEnvClient()
 	ctx := context.Background()
@@ -57,8 +58,8 @@ func CreateService(service *model.Service) (err error) {
 	return err
 }
 
-//DockerServices gets all running docker services
-func GetAllServices() (results []pc_model.ServiceState, err error) {
+// DockerServices gets all running docker services
+func GetAllServices() (results []pcmodel.ServiceState, err error) {
 
 	cli, err := client.NewEnvClient()
 
@@ -75,7 +76,7 @@ func GetAllServices() (results []pc_model.ServiceState, err error) {
 		return nil, err
 	}
 
-	sort.Sort(pc_model.ByName(services))
+	sort.Sort(pcmodel.ByName(services))
 	if len(services) > 0 {
 		// only non-empty services and not quiet, should we call TaskList and NodeList api
 		taskFilter := filters.NewArgs()
@@ -104,12 +105,12 @@ func GetAllServices() (results []pc_model.ServiceState, err error) {
 	return
 }
 
-//TotalReplicas returns the total number of replicas running for a service
-func TotalReplicas(services []swarm.Service, nodes []swarm.Node, tasks []swarm.Task) map[string]pc_model.ServiceState {
+// TotalReplicas returns the total number of replicas running for a service
+func TotalReplicas(services []swarm.Service, nodes []swarm.Node, tasks []swarm.Task) map[string]pcmodel.ServiceState {
 	running := map[string]int{}
 	tasksNoShutdown := map[string]int{}
 	activeNodes := make(map[string]struct{})
-	replicaState := make(map[string]pc_model.ServiceState)
+	replicaState := make(map[string]pcmodel.ServiceState)
 
 	for _, n := range nodes {
 		if n.Status.State != swarm.NodeStateDown {
@@ -128,7 +129,7 @@ func TotalReplicas(services []swarm.Service, nodes []swarm.Node, tasks []swarm.T
 
 	for _, service := range services {
 		if service.Spec.Mode.Replicated != nil && service.Spec.Mode.Replicated.Replicas != nil {
-			replicaState[service.ID] = pc_model.ServiceState{
+			replicaState[service.ID] = pcmodel.ServiceState{
 				ID:               service.ID,
 				Name:             service.Spec.Name,
 				Image:            service.Spec.TaskTemplate.ContainerSpec.Image,
@@ -139,7 +140,7 @@ func TotalReplicas(services []swarm.Service, nodes []swarm.Node, tasks []swarm.T
 	return replicaState
 }
 
-func deleteServices(services []pc_model.ServiceState) (err error) {
+func DeleteServices(services []pcmodel.ServiceState) (err error) {
 	cli, err := client.NewEnvClient()
 	ctx := context.Background()
 	if err != nil {
@@ -149,7 +150,11 @@ func deleteServices(services []pc_model.ServiceState) (err error) {
 
 	for _, service := range services {
 		log.Printf("🔥  Removing service: %s", service.Name)
-		cli.ServiceRemove(ctx, service.ID)
+		err := cli.ServiceRemove(ctx, service.ID)
+		if err != nil {
+			log.Printf("Error deleting service: %s", err)
+			return err
+		}
 	}
 
 	return
