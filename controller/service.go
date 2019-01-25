@@ -2,19 +2,19 @@ package controller
 
 import (
 	"context"
-	"fmt"
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/swarm"
 	"github.com/docker/docker/client"
-	"github.com/plancks-cloud/plancks-docker/model"
+	"github.com/plancks-cloud/plancks-cloud/model"
 	"log"
 )
 
-func CreateService(service *model.Service) {
+func CreateService(service *model.Service) (err error) {
 	cli, err := client.NewEnvClient()
 	ctx := context.Background()
 	if err != nil {
-		log.Panicln(fmt.Sprintf("Error getting docker client environment: %s", err))
+		log.Printf("Error getting docker client environment: %s", err)
+		return err
 	}
 
 	replicas := uint64(service.Replicas)
@@ -47,6 +47,8 @@ func CreateService(service *model.Service) {
 	)
 
 	if err != nil {
-		log.Fatalf("Error creating docker service: %s", err)
+		log.Printf("Error creating docker service: %s", err)
+		return err
 	}
+	return err
 }
