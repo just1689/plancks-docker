@@ -26,6 +26,8 @@ github.com/plancks-cloud/plancks-cloud v0.0.0-20190125102701-921ca0b0467d h1:DsG
 github.com/plancks-cloud/plancks-cloud v0.0.0-20190125102701-921ca0b0467d/go.mod h1:AVNH8O7qynTBTheRMp0sj5BRkX5mRgZ7Q7jAQrQ8iK0=
 github.com/plancks-cloud/plancks-cloud v0.0.0-20190125111234-e3d2a227df0d h1:Diy8albENJW/CoKa6kpjfOAtA0i/1Az4LNho05SDYII=
 github.com/plancks-cloud/plancks-cloud v0.0.0-20190125111234-e3d2a227df0d/go.mod h1:AVNH8O7qynTBTheRMp0sj5BRkX5mRgZ7Q7jAQrQ8iK0=
+github.com/plancks-cloud/plancks-cloud v0.0.0-20190125113015-0cfcfec348cd h1:lAPIzlyxCHiMtfow0fVa1yaBa0dUocblknKk4hYfNps=
+github.com/plancks-cloud/plancks-cloud v0.0.0-20190125113015-0cfcfec348cd/go.mod h1:AVNH8O7qynTBTheRMp0sj5BRkX5mRgZ7Q7jAQrQ8iK0=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/sirupsen/logrus v1.3.0/go.mod h1:LxeOpSwHxABJmUn/MG1IvRgCAasNZTLOkJPxbbu5VWo=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=

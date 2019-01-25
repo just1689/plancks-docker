@@ -11,6 +11,7 @@ type ServiceState struct {
 	Image            string `json:"image"`
 	ReplicasRunning  int
 	ReplicasRequired uint64
+	MemoryLimit      int
 }
 
 type ByName []swarm.Service

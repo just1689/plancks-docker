@@ -59,7 +59,7 @@ func CreateService(service *model.Service) (err error) {
 }
 
 // DockerServices gets all running docker services
-func GetAllServices() (results []pcmodel.ServiceState, err error) {
+func GetAllServiceStates() (results []pcmodel.ServiceState, err error) {
 
 	cli, err := client.NewEnvClient()
 
@@ -129,11 +129,14 @@ func TotalReplicas(services []swarm.Service, nodes []swarm.Node, tasks []swarm.T
 
 	for _, service := range services {
 		if service.Spec.Mode.Replicated != nil && service.Spec.Mode.Replicated.Replicas != nil {
+			//TODO Check if this is a valid way of getting the memory limits. Should probably be a pointer.
+			memLimit := int(service.Spec.TaskTemplate.Resources.Limits.MemoryBytes)
 			replicaState[service.ID] = pcmodel.ServiceState{
 				ID:               service.ID,
 				Name:             service.Spec.Name,
 				Image:            service.Spec.TaskTemplate.ContainerSpec.Image,
 				ReplicasRunning:  running[service.ID],
+				MemoryLimit:      memLimit,
 				ReplicasRequired: *service.Spec.Mode.Replicated.Replicas}
 		}
 	}

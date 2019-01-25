@@ -10,7 +10,7 @@ require (
 	github.com/klauspost/cpuid v1.2.0 // indirect
 	github.com/opencontainers/go-digest v1.0.0-rc1 // indirect
 	github.com/pkg/errors v0.8.1 // indirect
-	github.com/plancks-cloud/plancks-cloud v0.0.0-20190125111234-e3d2a227df0d
+	github.com/plancks-cloud/plancks-cloud v0.0.0-20190125113015-0cfcfec348cd
 	github.com/stretchr/testify v1.3.0 // indirect
 	golang.org/x/crypto v0.0.0-20190123085648-057139ce5d2b // indirect
 	golang.org/x/net v0.0.0-20190125091013-d26f9f9a57f3 // indirect
