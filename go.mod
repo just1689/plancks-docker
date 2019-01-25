@@ -15,4 +15,5 @@ require (
 	golang.org/x/crypto v0.0.0-20190123085648-057139ce5d2b // indirect
 	golang.org/x/net v0.0.0-20190125091013-d26f9f9a57f3 // indirect
 	golang.org/x/sys v0.0.0-20190124100055-b90733256f2e // indirect
+	vbom.ml/util v0.0.0-20180919145318-efcd4e0f9787
 )
