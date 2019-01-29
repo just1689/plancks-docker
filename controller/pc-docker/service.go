@@ -149,7 +149,10 @@ func TotalReplicas(services []swarm.Service, nodes []swarm.Node, tasks []swarm.T
 	for _, service := range services {
 		if service.Spec.Mode.Replicated != nil && service.Spec.Mode.Replicated.Replicas != nil {
 			//TODO Check if this is a valid way of getting the memory limits. Should probably be a pointer.
-			memLimit := int(service.Spec.TaskTemplate.Resources.Limits.MemoryBytes)
+			memLimit := 0
+			if service.Spec.TaskTemplate.Resources.Limits != nil {
+				memLimit = int(service.Spec.TaskTemplate.Resources.Limits.MemoryBytes)
+			}
 			replicaState[service.ID] = pcmodel.ServiceState{
 				ID:               service.ID,
 				Name:             service.Spec.Name,
