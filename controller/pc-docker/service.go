@@ -24,6 +24,20 @@ func CreateService(service *model.Service) (err error) {
 
 	replicas := uint64(service.Replicas)
 
+	networkName := service.Name
+	if networkName != "" {
+		err = createNetwork(service.Name)
+	} else {
+		networkName = DefaultNetwork
+		err = createNetwork(networkName)
+	}
+	if err != nil {
+		log.Printf("Error occurred while creating the network %s: %s", networkName, err)
+	}
+
+	var nets []swarm.NetworkAttachmentConfig
+	nets = append(nets, swarm.NetworkAttachmentConfig{Target: DefaultNetwork})
+
 	spec := swarm.ServiceSpec{
 		Annotations: swarm.Annotations{
 			Name: service.Name,
@@ -37,6 +51,7 @@ func CreateService(service *model.Service) (err error) {
 			ContainerSpec: swarm.ContainerSpec{
 				Image: service.Image,
 			},
+			Networks: nets,
 			Resources: &swarm.ResourceRequirements{
 				Limits: &swarm.Resources{
 					MemoryBytes: int64(service.MemoryLimit * 1024 * 1024),
