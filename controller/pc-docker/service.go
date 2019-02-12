@@ -188,14 +188,37 @@ func DeleteServices(services []pcmodel.ServiceState) (err error) {
 		return err
 	}
 
-	for _, service := range services {
-		log.Printf("🔥  Removing service: %s", service.Name)
-		err := cli.ServiceRemove(ctx, service.ID)
+	runningServices, err := serviceIdFromName(services)
+
+	if err != nil {
+		log.Printf("Error getting service IDs: %s", err)
+	}
+
+	for serviceId, serviceName := range runningServices {
+		log.Printf("🔥  Removing service: %s", serviceName)
+		err := cli.ServiceRemove(ctx, serviceId)
 		if err != nil {
-			log.Printf("Error deleting service: %s", err)
+			log.Printf("Error deleting service %s: %s", serviceName, err)
 			return err
 		}
 	}
-
 	return
+}
+
+func serviceIdFromName(services []pcmodel.ServiceState) (deletables map[string]string, err error) {
+	runningServices, err := GetAllServiceStates()
+	if err != nil {
+		log.Printf("Error getting services: %s", err)
+		return nil, err
+	}
+
+	for _, service := range services {
+		for _, runningService := range runningServices {
+			if service.Name == runningService.Name {
+				deletables[runningService.ID] = service.Name
+			}
+		}
+	}
+
+	return deletables, err
 }
