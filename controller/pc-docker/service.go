@@ -24,9 +24,9 @@ func CreateService(service *model.Service) (err error) {
 
 	replicas := uint64(service.Replicas)
 
-	networkName := service.Name
+	networkName := service.Network
 	if networkName != "" {
-		err = createNetwork(service.Name)
+		err = createNetwork(networkName)
 	} else {
 		networkName = DefaultNetwork
 		err = createNetwork(networkName)
