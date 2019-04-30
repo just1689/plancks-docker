@@ -24,15 +24,16 @@ func CreateService(service *model.Service) (err error) {
 
 	replicas := uint64(service.Replicas)
 
-	networkName := service.Network
-	if networkName != "" {
-		err = createNetwork(networkName)
-	} else {
-		networkName = DefaultNetwork
-		err = createNetwork(networkName)
-	}
-	if err != nil {
-		log.Printf("Error occurred while creating the network %s: %s", networkName, err)
+	for _, networkName := range service.Networks {
+		if networkName != "" {
+			err = createNetwork(networkName)
+		} else {
+			networkName = DefaultNetwork
+			err = createNetwork(networkName)
+		}
+		if err != nil {
+			log.Printf("Error occurred while creating the network %s: %s", networkName, err)
+		}
 	}
 
 	var nets []swarm.NetworkAttachmentConfig
