@@ -28,9 +28,8 @@ github.com/opencontainers/go-digest v1.0.0-rc1/go.mod h1:cMLVZDEM3+U2I4VmLI6N8jQ
 github.com/pkg/errors v0.8.1 h1:iURUrRGxPUNPdy5/HRSm+Yj6okJ6UtLINN0Q9M4+h3I=
 github.com/pkg/errors v0.8.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
 github.com/plancks-cloud/plancks-cloud v0.0.0-20190125113015-0cfcfec348cd/go.mod h1:AVNH8O7qynTBTheRMp0sj5BRkX5mRgZ7Q7jAQrQ8iK0=
-github.com/plancks-cloud/plancks-cloud v0.0.0-20190212160959-711028c4e658/go.mod h1:KkMbocSI7ScTpTBOZCDzjhthHcKSdYJCOlUL/2yjICg=
-github.com/plancks-cloud/plancks-cloud v1.0.1 h1:lm0FF2n9ynjPhs6dDKyJBjrR3UzOazN7pE1s93SMIIg=
-github.com/plancks-cloud/plancks-cloud v1.0.1/go.mod h1:Pbv9VJMMXWEjzWYs3qy5DW4yY9PjEjJxxY8pwNkM67g=
+github.com/plancks-cloud/plancks-cloud v1.0.2-0.20190305172735-f799d397f627 h1:QNwzdxZvYrRWHx7xzxWtsvWS/lbYcW2qjVxjtV5RfX8=
+github.com/plancks-cloud/plancks-cloud v1.0.2-0.20190305172735-f799d397f627/go.mod h1:Pbv9VJMMXWEjzWYs3qy5DW4yY9PjEjJxxY8pwNkM67g=
 github.com/plancks-cloud/plancks-docker v0.0.0-20190129130719-cb2802ed7521/go.mod h1:7mS6x439kHnt1VB/uUeackg6cPKiosqumo67nhAkqrY=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/sirupsen/logrus v1.3.0/go.mod h1:LxeOpSwHxABJmUn/MG1IvRgCAasNZTLOkJPxbbu5VWo=
